@@ -4,7 +4,6 @@ class Transport {
         this.brand = brand;
         this.image = image;
         this.type = null;
-
     }
     getInfo() {
         return {
@@ -17,7 +16,6 @@ class Transport {
         return this.price;
     }
 }
-
 class Car extends Transport {
     constructor(price, brand, image, doors) {
         super(price, brand, image);
@@ -28,7 +26,6 @@ class Car extends Transport {
         return this.doors;
     }
 }
-
 class Bike extends Transport {
     constructor(price, brand, image, maxSpeed) {
         super(price, brand, image);
@@ -48,7 +45,7 @@ for (el of data) {
     if (el.type === 'bike') arrayBikes.push(new Bike(el.price, el.brand, el.image, el.maxSpeed));
 }
 
-function renderElement(el, extraInfo, parent) {
+function renderElement(el, parent) {
     const container = document.createElement('div');
     container.classList.add('container');
 
@@ -62,12 +59,12 @@ function renderElement(el, extraInfo, parent) {
     container.appendChild(description);
 
     const extra = document.createElement('span');
-    if (extraInfo === 'doors') extra.textContent = `Doors: ${el.getDoorsCount()}`;
-    if (extraInfo === 'speed') extra.textContent = `Speed: ${el.getMaxSpeed()} km/h`;
+    if (el.type === 'car') extra.textContent = `Doors: ${el.getDoorsCount()}`;
+    if (el.type === 'bike') extra.textContent = `Speed: ${el.getMaxSpeed()} km/h`;
     description.appendChild(extra);
 
     parent.appendChild(container);
 }
 
-arrayCars.forEach(el => renderElement(el, 'doors', document.getElementById('cars')));
-arrayBikes.forEach(el => renderElement(el, 'speed', document.getElementById('bikes')));
+arrayCars.forEach(el => renderElement(el, document.getElementById('cars')));
+arrayBikes.forEach(el => renderElement(el, document.getElementById('bikes')));
