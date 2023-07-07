@@ -49,10 +49,13 @@ function renderElement(el, parent) {
     const container = document.createElement('div');
     container.classList.add('container');
 
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('img-container');
     const image = document.createElement('img');
     image.src = el.getInfo().image;
     image.classList.add('img');
-    container.appendChild(image);
+    imageContainer.appendChild(image);
+    container.appendChild(imageContainer);
 
     const description = document.createElement('p');
     description.innerText = `${el.getInfo().brand}\nPrice: ${el.getPrice()}$`;
